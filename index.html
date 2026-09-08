@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kursmappen · DLRG Ausbildung</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B3C5D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{
+  --tief:#0B3C5D; --wasser:#15719B; --hell:#E8F1F6; --kachel:#F6F9FB;
+  --linie:#CBDDE7; --weiss:#fff; --text:#12222C; --grau:#5C7080;
+  --akzent:#15719B;
+  --r:14px; --pad:16px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--kachel); color:var(--text);
+  font-size:17px; line-height:1.45;
+  padding-bottom:calc(96px + var(--safe-b));
+  -webkit-text-size-adjust:100%;
+}
+h1,h2,h3{margin:0;line-height:1.2;font-weight:700}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+a{color:var(--wasser)}
+
+/* ---------- Kopf ---------- */
+.top{
+  position:sticky; top:0; z-index:30; background:var(--akzent); color:#fff;
+  padding:calc(10px + env(safe-area-inset-top,0px)) var(--pad) 12px;
+  display:flex; align-items:center; gap:12px;
+  box-shadow:0 2px 10px rgba(11,60,93,.18);
+}
+.top .zurueck{
+  flex:0 0 auto; width:42px; height:42px; border-radius:11px;
+  background:rgba(255,255,255,.16); display:grid; place-items:center; font-size:22px;
+}
+.top .titel{flex:1;min-width:0}
+.top .titel b{display:block;font-size:19px;letter-spacing:.1px}
+.top .titel span{display:block;font-size:13px;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.wrap{padding:var(--pad);max-width:820px;margin:0 auto}
+
+/* ---------- Startseite: Bahnen ---------- */
+.intro{color:var(--grau);font-size:15px;margin:2px 0 18px}
+.bahn{
+  display:flex; align-items:stretch; width:100%; text-align:left;
+  background:var(--weiss); border:1px solid var(--linie); border-radius:var(--r);
+  margin-bottom:12px; overflow:hidden; box-shadow:0 1px 2px rgba(11,60,93,.06);
+}
+.bahn .kappe{flex:0 0 12px;background:var(--c)}
+.bahn .inh{padding:15px 14px;flex:1;min-width:0}
+.bahn .inh b{display:block;font-size:19px}
+.bahn .inh span{display:block;font-size:13.5px;color:var(--grau);margin-top:3px}
+.bahn .pfeil{display:grid;place-items:center;padding-right:14px;color:var(--linie);font-size:26px}
+
+/* ---------- Kurs ---------- */
+.klapp{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--r);margin-bottom:18px;overflow:hidden}
+.klapp>summary{padding:15px var(--pad);font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.klapp>summary::-webkit-details-marker{display:none}
+.klapp>summary::after{content:"+";font-size:24px;color:var(--grau);font-weight:400}
+.klapp[open]>summary::after{content:"–"}
+.klapp .body{padding:0 var(--pad) 6px}
+.klapp h3{font-size:14px;color:var(--akzent);margin:14px 0 6px}
+.klapp ul{margin:0 0 12px;padding-left:20px}
+.klapp li{margin-bottom:7px;font-size:15px}
+
+.gitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
+.karte{
+  background:var(--weiss);border:1px solid var(--linie);border-radius:var(--r);
+  padding:13px 13px 14px;text-align:left;display:flex;flex-direction:column;gap:7px;min-height:118px;
+  box-shadow:0 1px 2px rgba(11,60,93,.06);
+}
+.karte .nr{
+  font-size:13px;font-weight:700;color:var(--c);display:flex;align-items:center;gap:7px;
+}
+.karte .nr i{width:22px;height:3px;background:var(--c);border-radius:2px;font-style:normal}
+.karte b{font-size:16px;line-height:1.25;flex:1}
+
+/* ---------- Stunde ---------- */
+.ziel{background:var(--hell);border-left:5px solid var(--c);border-radius:0 10px 10px 0;padding:13px 14px;margin-bottom:8px;font-size:16px}
+.material{color:var(--grau);font-size:14.5px;margin:0 0 20px;padding:0 2px}
+
+.phase{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.phase .kopf{display:flex;align-items:stretch;gap:0}
+.zeit{
+  flex:0 0 84px;background:var(--c);color:#fff;border:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:14px 4px;
+}
+.zeit .z{font-size:23px;font-weight:800;line-height:1}
+.zeit .m{font-size:11px;opacity:.9;letter-spacing:.4px}
+.zeit .start{font-size:10px;opacity:.85;margin-top:3px}
+.phase .kopfinh{padding:12px 14px;flex:1;min-width:0}
+.phase .ph{font-size:12.5px;color:var(--grau);margin-bottom:2px}
+.phase .ti{font-size:17px;font-weight:700;line-height:1.25}
+.phase .txt{padding:0 14px 13px;font-size:16px}
+.phase .txt p{margin:9px 0 0}
+.orga{border-top:1px dashed var(--linie);padding:11px 14px;background:#FBFDFE}
+.orga p{margin:0 0 5px;font-size:14.5px;color:var(--grau);padding-left:16px;position:relative}
+.orga p:last-child{margin-bottom:0}
+.orga p::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--linie)}
+
+.diff{display:grid;grid-template-columns:1fr;gap:10px;margin:20px 0}
+@media(min-width:560px){.diff{grid-template-columns:1fr 1fr}}
+.diff div{border:1px solid var(--linie);border-radius:12px;padding:12px 14px;background:var(--weiss);font-size:15px}
+.diff b{display:block;font-size:12.5px;margin-bottom:4px;color:var(--grau)}
+
+.merk{border-radius:12px;padding:13px 15px;margin-bottom:12px;font-size:15.5px}
+.merk b{display:block;font-size:12.5px;margin-bottom:3px;opacity:.75}
+.merk.pruef{background:var(--hell)}
+.merk.sich{background:#FDF0E7;border:1px solid #F2C9AE}
+
+.regel{background:var(--weiss);border:1px solid var(--linie);border-radius:var(--r);padding:14px;text-align:center;margin-bottom:12px}
+.regel .lab{font-size:12.5px;color:var(--grau);margin-bottom:8px}
+.regel img{width:100%;max-width:340px;border-radius:10px;display:block;margin:0 auto 10px}
+.regel .satz{font-size:17px;font-weight:700;color:var(--c)}
+.regel .hin{font-size:12.5px;color:var(--grau);margin-top:8px}
+
+.blaettern{display:flex;gap:10px;margin:22px 0 10px}
+.blaettern button{
+  flex:1;background:var(--weiss);border:1px solid var(--linie);border-radius:12px;padding:15px 10px;
+  font-weight:700;font-size:15px;color:var(--akzent)
+}
+.blaettern button[disabled]{opacity:.35;color:var(--grau)}
+
+/* ---------- Vollbild-Grafik ---------- */
+.voll{position:fixed;inset:0;background:#fff;z-index:60;display:none;flex-direction:column}
+.voll.an{display:flex}
+.voll .bild{flex:1;display:grid;place-items:center;padding:14px}
+.voll img{max-width:100%;max-height:100%;object-fit:contain}
+.voll .satz{padding:16px 20px calc(20px + var(--safe-b));font-size:22px;font-weight:800;text-align:center;color:var(--c);border-top:1px solid var(--linie)}
+.voll .zu{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px;width:44px;height:44px;border-radius:12px;background:rgba(0,0,0,.06);display:grid;place-items:center;font-size:24px}
+
+/* ---------- Timer ---------- */
+.timerbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--tief);color:#fff;
+  padding:10px var(--pad) calc(10px + var(--safe-b));
+  display:flex;align-items:center;gap:12px;box-shadow:0 -3px 14px rgba(0,0,0,.2)
+}
+.timerbar .uhr{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;min-width:104px;letter-spacing:.5px}
+.timerbar .uhr.aus{opacity:.45}
+.timerbar .uhr.alarm{color:#FFD34E}
+.timerbar .lab{font-size:12px;opacity:.75;line-height:1.15;flex:1;min-width:0}
+.timerbar .knopf{
+  width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.14);
+  display:grid;place-items:center;font-size:22px;flex:0 0 auto
+}
+.timerbar .knopf.haupt{background:#2E9BCB}
+.blatt{
+  position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;
+  border-radius:18px 18px 0 0;padding:18px var(--pad) calc(18px + var(--safe-b));
+  box-shadow:0 -6px 30px rgba(0,0,0,.25);display:none
+}
+.blatt.an{display:block}
+.blatt h3{font-size:16px;margin-bottom:12px}
+.presets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.presets button{background:var(--hell);border:1px solid var(--linie);border-radius:12px;padding:14px 8px;font-weight:700;color:var(--tief)}
+.presets button small{display:block;font-weight:400;font-size:11.5px;color:var(--grau);margin-top:3px}
+.blatt .zu2{width:100%;margin-top:14px;padding:14px;border-radius:12px;background:var(--hell);font-weight:700;color:var(--tief)}
+.schirm{position:fixed;inset:0;background:rgba(11,34,44,.45);z-index:54;display:none}
+.schirm.an{display:block}
+.wach{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--grau);margin:18px 0 4px}
+.wach input{width:20px;height:20px}
+@media(prefers-reduced-motion:no-preference){.blatt.an{animation:auf .18s ease-out}}
+@keyframes auf{from{transform:translateY(100%)}to{transform:translateY(0)}}
+:focus-visible{outline:3px solid #2E9BCB;outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="zurueck" id="zurueck" aria-label="Zurück" hidden>‹</button>
+  <div class="titel"><b id="tTitel">Kursmappen</b><span id="tSub">DLRG Ausbildung</span></div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<div class="voll" id="voll">
+  <button class="zu" id="vollZu" aria-label="Schließen">×</button>
+  <div class="bild"><img id="vollImg" alt=""></div>
+  <div class="satz" id="vollSatz"></div>
+</div>
+
+<div class="schirm" id="schirm"></div>
+<div class="blatt" id="blatt" role="dialog" aria-label="Timer wählen">
+  <h3>Timer starten</h3>
+  <div class="presets" id="presets"></div>
+  <label class="wach"><input type="checkbox" id="wach"> Display anlassen, solange die App offen ist</label>
+  <button class="zu2" id="blattZu">Schließen</button>
+</div>
+
+<div class="timerbar">
+  <div class="uhr aus" id="uhr">00:00</div>
+  <div class="lab" id="uhrLab">Timer</div>
+  <button class="knopf" id="bReset" aria-label="Zurücksetzen">↺</button>
+  <button class="knopf haupt" id="bPlay" aria-label="Start/Pause">▶</button>
+  <button class="knopf" id="bWahl" aria-label="Zeit wählen">⏱</button>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+"use strict";
+var K = window.KURSE || [];
+var app = document.getElementById('app');
+var elTitel = document.getElementById('tTitel'), elSub = document.getElementById('tSub');
+var elBack = document.getElementById('zurueck');
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function kurs(key){ for(var i=0;i<K.length;i++) if(K[i].key===key) return K[i]; return null; }
+function min(z){ var m=/(\d+)/.exec(z||''); return m?+m[1]:0; }
+
+/* ---------------- Ansichten ---------------- */
+function viewHome(){
+  elTitel.textContent='Kursmappen'; elSub.textContent='DLRG Ausbildung';
+  elBack.hidden=true; document.documentElement.style.setProperty('--akzent','#15719B');
+  var h='<p class="intro">Stundenverlaufspläne für den Beckenrand. Wähle einen Kurs.</p>';
+  K.forEach(function(k){
+    h+='<button class="bahn" style="--c:'+k.farbe+'" onclick="location.hash=\'#/k/'+k.key+'\'">'+
+       '<span class="kappe"></span><span class="inh"><b>'+esc(k.titel)+'</b><span>'+esc(k.sub)+'</span></span>'+
+       '<span class="pfeil">›</span></button>';
+  });
+  app.innerHTML=h; scrollTo(0,0);
+}
+
+function viewKurs(key){
+  var k=kurs(key); if(!k) return viewHome();
+  elTitel.textContent=k.titel; elSub.textContent=k.sub;
+  elBack.hidden=false; elBack.onclick=function(){location.hash='#/';};
+  document.documentElement.style.setProperty('--akzent',k.farbe);
+  var c=k.cover||{}, h='';
+  h+='<details class="klapp"><summary>Prüfungsanforderungen</summary><div class="body">';
+  if((c.theorie||[]).length){ h+='<h3>Theorie</h3><ul>'+c.theorie.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'; }
+  if((c.praxis||[]).length){ h+='<h3>Praxis</h3><ul>'+c.praxis.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'; }
+  if((c.hinweise||[]).length){ h+='<h3>Rahmen und Hinweise</h3><ul>'+c.hinweise.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'; }
+  h+='</div></details>';
+  h+='<div class="gitter">';
+  k.lessons.forEach(function(L){
+    h+='<button class="karte" style="--c:'+k.farbe+'" onclick="location.hash=\'#/k/'+k.key+'/'+L.nr+'\'">'+
+       '<span class="nr"><i></i>'+k.einheit+' '+L.nr+'</span><b>'+esc(L.thema)+'</b></button>';
+  });
+  h+='</div>';
+  app.innerHTML=h; scrollTo(0,0);
+}
+
+function viewStunde(key,nr){
+  var k=kurs(key); if(!k) return viewHome();
+  var L=null,idx=-1;
+  k.lessons.forEach(function(x,i){ if(x.nr===nr){L=x;idx=i;} });
+  if(!L) return viewKurs(key);
+  elTitel.textContent=k.einheit+' '+L.nr+' · '+k.kurz; elSub.textContent=L.thema;
+  elBack.hidden=false; elBack.onclick=function(){location.hash='#/k/'+k.key;};
+  document.documentElement.style.setProperty('--akzent',k.farbe);
+  var C=k.farbe, h='';
+  h+='<div class="ziel" style="--c:'+C+'"><b>Ziel: </b>'+esc(L.ziel)+'</div>';
+  if(L.material) h+='<p class="material">'+esc(L.material)+'</p>';
+
+  L.rows.forEach(function(r,i){
+    var m=min(r.zeit);
+    h+='<section class="phase"><div class="kopf">'+
+       '<button class="zeit" style="--c:'+C+'" data-min="'+m+'" data-lab="'+esc(r.phase+' · '+r.titel)+'">'+
+       '<span class="z">'+m+'</span><span class="m">min</span><span class="start">Timer ▶</span></button>'+
+       '<div class="kopfinh"><div class="ph">'+esc(r.phase)+'</div><div class="ti">'+esc(r.titel||'')+'</div></div></div>';
+    if((r.text||[]).length) h+='<div class="txt">'+r.text.map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+    if((r.orga||[]).length) h+='<div class="orga">'+r.orga.map(function(t){return '<p>'+esc(t)+'</p>';}).join('')+'</div>';
+    h+='</section>';
+  });
+
+  if(L.leichter||L.staerker){
+    h+='<div class="diff">'+
+       '<div><b>Leichter</b>'+esc(L.leichter)+'</div>'+
+       '<div><b>Fordernder</b>'+esc(L.staerker)+'</div></div>';
+  }
+  if(L.pruefung) h+='<div class="merk pruef"><b>Prüfungsbezug</b>'+esc(L.pruefung)+'</div>';
+  if(L.sicher)   h+='<div class="merk sich"><b>Sicherheit</b>'+esc(L.sicher)+'</div>';
+  if(L.theorieTrocken) h+='<div class="merk pruef"><b>Theorie / Trocken</b>'+esc(L.theorieTrocken)+'</div>';
+  if(L.img){
+    h+='<div class="regel" style="--c:'+C+'"><div class="lab">Baderegel '+L.badeNr+' von 10</div>'+
+       '<img src="'+L.img+'" alt="Baderegel '+L.badeNr+'" id="regelBild">'+
+       '<div class="satz">'+esc(L.bade)+'</div>'+
+       '<div class="hin">Antippen, um sie den Kindern groß zu zeigen</div></div>';
+  }
+  var vor = idx>0 ? k.lessons[idx-1] : null, nach = idx<k.lessons.length-1 ? k.lessons[idx+1] : null;
+  h+='<nav class="blaettern">'+
+     '<button '+(vor?'':'disabled')+' onclick="location.hash=\'#/k/'+k.key+'/'+(vor?vor.nr:'')+'\'">'+
+       (vor ? '‹ '+k.einheit+' '+vor.nr : 'Kursanfang')+'</button>'+
+     '<button '+(nach?'':'disabled')+' onclick="location.hash=\'#/k/'+k.key+'/'+(nach?nach.nr:'')+'\'">'+
+       (nach ? k.einheit+' '+nach.nr+' ›' : 'Kursende')+'</button>'+
+     '</nav>';
+  app.innerHTML=h; scrollTo(0,0);
+
+  Array.prototype.forEach.call(app.querySelectorAll('.zeit'),function(b){
+    b.onclick=function(){ Timer.setze(+b.dataset.min*60, b.dataset.lab); Timer.start(); };
+  });
+  var rb=document.getElementById('regelBild');
+  if(rb) rb.onclick=function(){ zeigeVoll(L.img, L.bade, C); };
+}
+
+/* ---------------- Vollbild ---------------- */
+var voll=document.getElementById('voll');
+function zeigeVoll(src,satz,c){
+  document.getElementById('vollImg').src=src;
+  var s=document.getElementById('vollSatz'); s.textContent=satz; s.style.setProperty('--c',c);
+  s.style.color=c; voll.classList.add('an');
+}
+document.getElementById('vollZu').onclick=function(){ voll.classList.remove('an'); };
+
+/* ---------------- Timer ---------------- */
+var Timer=(function(){
+  var uhr=document.getElementById('uhr'), lab=document.getElementById('uhrLab');
+  var bPlay=document.getElementById('bPlay'), bReset=document.getElementById('bReset');
+  var modus='stopp';      // 'stopp' = Stoppuhr hoch, 'count' = Countdown
+  var ziel=0, rest=0, laeuft=false, t0=0, tick=null, name='Stoppuhr';
+
+  function fmt(s){ s=Math.max(0,Math.round(s)); var m=Math.floor(s/60), r=s%60;
+    return (m<10?'0':'')+m+':'+(r<10?'0':'')+r; }
+  function mal(){
+    uhr.textContent=fmt(rest);
+    uhr.classList.toggle('aus', !laeuft && rest===0);
+    lab.textContent=name;
+  }
+  function schritt(){
+    var d=(Date.now()-t0)/1000; t0=Date.now();
+    if(modus==='count'){
+      rest-=d;
+      if(rest<=0){ rest=0; halt(); alarm(); uhr.classList.add('alarm'); lab.textContent=name+' — Zeit abgelaufen'; return; }
+    } else { rest+=d; }
+    mal();
+  }
+  function alarm(){
+    try{ if(navigator.vibrate) navigator.vibrate([250,120,250,120,400]); }catch(e){}
+    try{
+      var A=window.AudioContext||window.webkitAudioContext; if(!A) return;
+      var ctx=new A();
+      [0,0.45,0.9].forEach(function(off){
+        var o=ctx.createOscillator(), g=ctx.createGain();
+        o.frequency.value=880; o.connect(g); g.connect(ctx.destination);
+        g.gain.setValueAtTime(0.001,ctx.currentTime+off);
+        g.gain.exponentialRampToValueAtTime(0.4,ctx.currentTime+off+0.02);
+        g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+off+0.32);
+        o.start(ctx.currentTime+off); o.stop(ctx.currentTime+off+0.35);
+      });
+      setTimeout(function(){ try{ctx.close();}catch(e){} },2000);
+    }catch(e){}
+  }
+  function los(){ if(laeuft) return; laeuft=true; t0=Date.now();
+    uhr.classList.remove('alarm','aus'); bPlay.textContent='❚❚'; tick=setInterval(schritt,200); mal(); }
+  function halt(){ laeuft=false; bPlay.textContent='▶'; if(tick){clearInterval(tick);tick=null;} mal(); }
+
+  bPlay.onclick=function(){ laeuft?halt():los(); };
+  bReset.onclick=function(){ halt(); uhr.classList.remove('alarm');
+    rest = (modus==='count') ? ziel : 0; mal(); };
+
+  mal();
+  return {
+    setze:function(sek,titel){ modus='count'; ziel=sek; rest=sek; name=titel||fmt(sek); halt(); uhr.classList.remove('alarm'); mal(); },
+    stoppuhr:function(){ modus='stopp'; ziel=0; rest=0; name='Stoppuhr'; halt(); mal(); },
+    start:los
+  };
+})();
+
+/* Timer-Auswahl */
+var blatt=document.getElementById('blatt'), schirm=document.getElementById('schirm');
+var PRESETS=[
+  {s:75,  t:'1:15', u:'50 m Brust (Gold)'},
+  {s:90,  t:'1:30', u:'50 m Transport (DRSA)'},
+  {s:180, t:'3:00', u:'HLW / 3× Tieftauchen'},
+  {s:600, t:'10:00',u:'200 m (DRSA Bronze)'},
+  {s:900, t:'15:00',u:'200 m / 400 m'},
+  {s:1800,t:'30:00',u:'800 m (DSA Gold)'}
+];
+(function(){
+  var h='';
+  PRESETS.forEach(function(p,i){ h+='<button data-i="'+i+'">'+p.t+'<small>'+p.u+'</small></button>'; });
+  h+='<button data-stop="1">Stoppuhr<small>zählt aufwärts</small></button>';
+  var box=document.getElementById('presets'); box.innerHTML=h;
+  box.onclick=function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.dataset.stop){ Timer.stoppuhr(); } else { var p=PRESETS[+b.dataset.i]; Timer.setze(p.s,p.u); }
+    Timer.start(); zu();
+  };
+})();
+function auf(){ blatt.classList.add('an'); schirm.classList.add('an'); }
+function zu(){ blatt.classList.remove('an'); schirm.classList.remove('an'); }
+document.getElementById('bWahl').onclick=auf;
+document.getElementById('blattZu').onclick=zu;
+schirm.onclick=zu;
+
+/* Display anlassen */
+var wachLock=null, wachBox=document.getElementById('wach');
+if(!('wakeLock' in navigator)){ wachBox.closest('.wach').style.display='none'; }
+wachBox.onchange=function(){
+  if(wachBox.checked){
+    navigator.wakeLock.request('screen').then(function(l){ wachLock=l;
+      l.addEventListener('release',function(){ wachLock=null; wachBox.checked=false; });
+    }).catch(function(){ wachBox.checked=false; });
+  } else if(wachLock){ wachLock.release(); wachLock=null; }
+};
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='visible' && wachBox.checked && !wachLock){
+    navigator.wakeLock.request('screen').then(function(l){wachLock=l;}).catch(function(){});
+  }
+});
+
+/* ---------------- Router ---------------- */
+function route(){
+  if(voll.classList.contains('an')) voll.classList.remove('an');
+  var p=(location.hash||'#/').replace(/^#\/?/,'').split('/').filter(Boolean);
+  if(p[0]==='k' && p[1] && p[2]) viewStunde(p[1], +p[2]);
+  else if(p[0]==='k' && p[1]) viewKurs(p[1]);
+  else viewHome();
+}
+window.addEventListener('hashchange',route);
+route();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+}
+})();
+</script>
+</body>
+</html>
