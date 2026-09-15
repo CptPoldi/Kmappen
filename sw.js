@@ -1,5 +1,5 @@
 /* Offline-Cache. Bei Inhaltsänderungen VERSION hochzählen. */
-const VERSION = 'kursmappen-v1';
+const VERSION = 'kursmappen-v2';
 const DATEIEN = [
   './','./index.html','./data.js','./manifest.webmanifest','./icon-192.png','./icon-512.png',
   './img/regel-1.webp','./img/regel-2.webp','./img/regel-3.webp','./img/regel-4.webp','./img/regel-5.webp',
